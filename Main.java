@@ -14,11 +14,11 @@ public class Main {
         String password = sc.nextLine();
 
        if(checkUser(login, password)){*/
-           LoadFile.load("src//ExamTaskV2//BaseEmployee.bin", Program.getEmployeeList());
-           LoadFile.load("src//ExamTaskV2//DismissEmployee.bin", Program.getDismissEmployeeList());
+           LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
+           LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
            chooseAction();
-           SaveFile.save("src//ExamTaskV2//BaseEmployee.bin", Program.getEmployeeList());
-           SaveFile.save("src//ExamTaskV2//DismissEmployee.bin", Program.getDismissEmployeeList());
+           SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
+           SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
       // }
         sc.close();
     }
