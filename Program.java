@@ -57,16 +57,13 @@ public class Program {
     }
 
     public static void dismiss(){
-        //System.out.println("Select the employee's surname to terminate");
         try {
-            //int disLine = searchEmployee(sc.nextLine());
             int disLine = searchEmployee();
             dismissEmployeeList.getBaseList().add(employeeList.getBaseList().get(disLine));
             employeeList.getBaseList().remove(disLine);
         }catch (Exception e){
             System.out.println("An error occurred, please try again");
         }
-
     }
 
     public static void showEmployersAtConsole(List<Employee> empList) {
@@ -89,8 +86,6 @@ public class Program {
     public static void changeEmployee() {
         EmployeeList tempEmployeeList = new EmployeeList();
         tempEmployeeList.setBaseList(employeeList.getBaseList());
-        //System.out.println("Enter a surname of employee");
-        //Integer changeEmpString = searchEmployee(sc.nextLine());
         Integer changeEmpString = searchEmployee();
         if(changeEmpString != -1) {
             System.out.println("""
@@ -120,52 +115,43 @@ public class Program {
                     }
                 }
                 switch (num) {
-                    case 1: {
+                    case 1 -> {
                         System.out.println("You change Name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setName(sc.nextLine());  //setName(sc.nextLine());
-                        break;
                     }
-                    case 2: {
+                    case 2 -> {
                         System.out.println("You change Surname to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setSurname(sc.nextLine());
-                        break;
                     }
-                    case 3: {
+                    case 3 -> {
                         System.out.println("You change Date of birthday to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setDob(sc.nextLine());
-                        break;
                     }
-                    case 4: {
+                    case 4 -> {
                         System.out.println("You change Gender to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setGender(sc.nextLine());
-                        break;
                     }
-                    case 5: {
+                    case 5 -> {
                         System.out.println("You change Phone Number to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setPhoneNumber(sc.nextLine());
-                        break;
                     }
-                    case 6: {
+                    case 6 -> {
                         System.out.println("You change Job title to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setJobTitle(sc.nextLine());
-                        break;
                     }
-                    case 7: {
+                    case 7 -> {
                         System.out.println("You change Department name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setDepName(sc.nextLine());
-                        break;
                     }
-                    case 8: {
+                    case 8 -> {
                         System.out.println("You change boss name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setBossName(sc.nextLine());
-                        break;
                     }
-                    case 9: {
+                    case 9 -> {
                         System.out.println("You change boss surname to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setBossSurname(sc.nextLine());
-                        break;
                     }
-                    case 10: {
+                    case 10 -> {
                         System.out.println("Enter changed year of employment");
                         int year = sc.nextInt();
                         System.out.println("Enter changed month of employment");
@@ -175,12 +161,10 @@ public class Program {
                         sc.nextLine();
                         employeeList.getBaseList().get(changeEmpString).setEmpDate(new GregorianCalendar(year,
                                 (month - 1), day));
-                        break;
                     }
-                    case 11: {
+                    case 11 -> {
                         System.out.println("You change salary to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setSalary(sc.nextInt());
-                        break;
                     }
                 }
                 System.out.println("Continue employee changing?(y/n):");
@@ -253,22 +237,18 @@ public class Program {
                     Integer count = 0;                          //Integer for HashMap to saving number of Employee position in EmployeeList
                     HashMap<Integer, Employee> searchList = new HashMap<>();
                     for (Employee employee:employeeList.getBaseList()) {
-                        switch (selAct){
-                            case 1: {
+                        switch (selAct) {
+                            case 1 -> {
                                 searchBoolean = employee.getSurname().equalsIgnoreCase(searchWord);
-                                break;
                             }
-                            case 2:{
+                            case 2 -> {
                                 searchBoolean = employee.getJobTitle().equalsIgnoreCase(searchWord);
-                                break;
                             }
-                            case 3:{
+                            case 3 -> {
                                 searchBoolean = employee.getDepName().equalsIgnoreCase(searchWord);
-                                break;
                             }
-                            case 4:{
+                            case 4 -> {
                                 searchBoolean = employee.getBossSurname().equalsIgnoreCase(searchWord);
-                                break;
                             }
                         }
                         if (searchBoolean) {                //if we find search word in list

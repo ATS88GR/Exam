@@ -32,7 +32,6 @@ public class Employee implements Serializable {
         this.bossSurname = bossSurname;
         this.empDate = empDate;
         this.salary = salary;
-
     }
 
     public Employee() {

@@ -51,41 +51,32 @@ public class Main {
     }
 
     private static void actions(int act) {
-        switch (act){
-            case 1: {
+        switch (act) {
+            case 1 -> {
                 Program.recruit();
-                break;
             }
-            case 2: {
+            case 2 -> {
                 Program.dismiss();
-                break;
             }
-            case 3: {
+            case 3 -> {
                 Program.showEmployersAtConsole(Program.getEmployeeList().getBaseList());
-                break;
             }
-            case 4: {
+            case 4 -> {
                 Program.showEmployersAtConsole(Program.getDismissEmployeeList().getBaseList());
-                break;
             }
-            case 5: {
+            case 5 -> {
                 Program.changeEmployee();
-                break;
             }
-            case 6: {
+            case 6 -> {
                 Program.searchEmployee();
-                break;
             }
-            case 7: {
-                System.out.println("75");
-                break;
+            case 7 -> {
+                Reports.main();
             }
-            case 8: {
+            case 8 -> {
                 System.out.println("Exit the program");
-                break;
             }
-            default:
-                System.out.println("You choose number without action");
+            default -> System.out.println("You choose number without action");
         }
     }
 
