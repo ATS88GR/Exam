@@ -52,30 +52,14 @@ public class Main {
 
     private static void actions(int act) {
         switch (act) {
-            case 1 -> {
-                Program.recruit();
-            }
-            case 2 -> {
-                Program.dismiss();
-            }
-            case 3 -> {
-                Program.showEmployersAtConsole(Program.getEmployeeList().getBaseList());
-            }
-            case 4 -> {
-                Program.showEmployersAtConsole(Program.getDismissEmployeeList().getBaseList());
-            }
-            case 5 -> {
-                Program.changeEmployee();
-            }
-            case 6 -> {
-                Program.searchEmployee();
-            }
-            case 7 -> {
-                Reports.main();
-            }
-            case 8 -> {
-                System.out.println("Exit the program");
-            }
+            case 1 -> {Program.recruit();}
+            case 2 -> {Program.dismiss();}
+            case 3 -> {Program.showEmployersAtConsole(Program.getEmployeeList().getBaseList());}
+            case 4 -> {Program.showEmployersAtConsole(Program.getDismissEmployeeList().getBaseList());}
+            case 5 -> {Program.changeEmployee();}
+            case 6 -> {Program.searchEmployee();}
+            case 7 -> {Reports.main();}
+            case 8 -> {System.out.println("Exit the program");}
             default -> System.out.println("You choose number without action");
         }
     }

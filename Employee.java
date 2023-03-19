@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 
 public class Employee implements Serializable {
 
-
     private String name;
     private String surname;
     private String dob;     //date of birthday

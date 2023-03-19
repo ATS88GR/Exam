@@ -238,22 +238,12 @@ public class Program {
                     HashMap<Integer, Employee> searchList = new HashMap<>();
                     for (Employee employee:employeeList.getBaseList()) {
                         switch (selAct) {
-                            case 1 -> {
-                                searchBoolean = employee.getSurname().equalsIgnoreCase(searchWord);
-                            }
-                            case 2 -> {
-                                searchBoolean = employee.getJobTitle().equalsIgnoreCase(searchWord);
-                            }
-                            case 3 -> {
-                                searchBoolean = employee.getDepName().equalsIgnoreCase(searchWord);
-                            }
-                            case 4 -> {
-                                searchBoolean = employee.getBossSurname().equalsIgnoreCase(searchWord);
-                            }
+                            case 1 -> {searchBoolean = employee.getSurname().equalsIgnoreCase(searchWord);}
+                            case 2 -> {searchBoolean = employee.getJobTitle().equalsIgnoreCase(searchWord);}
+                            case 3 -> {searchBoolean = employee.getDepName().equalsIgnoreCase(searchWord);}
+                            case 4 -> {searchBoolean = employee.getBossSurname().equalsIgnoreCase(searchWord);}
                         }
-                        if (searchBoolean) {                //if we find search word in list
-                            searchList.put(count,employee);
-                        }
+                        if (searchBoolean) searchList.put(count,employee);  //if we find search word in list
                         count++;
                     }
                     // Processing list with search results
@@ -270,9 +260,8 @@ public class Program {
                                     worker.getPhoneNumber(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
                                     worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
                         });
-                        if(searchList.size() == 1) {
+                        if(searchList.size() == 1)
                             return (Integer) searchList.keySet().toArray()[0];
-                        }
                         else {
                             int num;
                             while (true) {
