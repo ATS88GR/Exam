@@ -1,0 +1,4 @@
+Sales, boss surname is Popova
+Economic, boss surname is Ivanov
+Management, boss surname is Sokolov
+Financial, boss surname is Baranov

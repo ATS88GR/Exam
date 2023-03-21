@@ -1,0 +1,12 @@
+Name: Artsiom, surname: Turok, job title: manager, department name: Management salary: 2500
+Name: Eva, surname: Volkova, job title: financier, department name: Financial salary: 2500
+Name: Anna, surname: Kuznecova, job title: marketer, department name: Sales salary: 2300
+Name: Aleksander, surname: Ivanov, job title: financier, department name: Financial salary: 2200
+Name: Mark, surname: Fedorov, job title: manager, department name: Management salary: 2100
+Name: Mihail, surname: Petrov, job title: financier, department name: Financial salary: 2000
+Name: Maksim, surname: Mihailov, job title: economist, department name: Economical salary: 2000
+Name: Sofia, surname: Smirnova, job title: economist, department name: Economic salary: 1900
+Name: Maria, surname: Turok, job title: marketer, department name: Sales salary: 1900
+Name: Maria, surname: Vasileva, job title: manager, department name: Management salary: 1800
+Name: Alis, surname: Novikova, job title: marketer, department name: Sales salary: 1700
+Name: Lev, surname: Alekseev, job title: marketer, department name: Sales salary: 1500

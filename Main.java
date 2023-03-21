@@ -3,7 +3,7 @@ package ExamTaskV2;
 import java.util.Scanner;
 
 public class Main {
-    private static int count =0;
+    private static int count =0;        // for authorization attempts
 
     public static Scanner sc = new Scanner(System.in);
 

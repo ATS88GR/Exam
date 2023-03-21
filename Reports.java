@@ -2,12 +2,13 @@ package ExamTaskV2;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 import static ExamTaskV2.Main.sc;
 
 public class Reports {
-    private static final HashSet<String> departments = new HashSet<>();
     public static void main() {
         System.out.println("""
              Select report type:
@@ -28,12 +29,44 @@ public class Reports {
 
     private static void actions(int chooseAct) {
         switch (chooseAct) {
-            case 1 -> {structOrg(null);}
+            case 1 -> {structOrg();}
             case 2 -> {averageSalary();}
+            case 3 -> {topSalary();}
+            case 4 -> {devotedEmployee();}
         }
     }
 
+    private static void devotedEmployee() {
+        GregorianCalendar thisDay = new GregorianCalendar();
+        System.out.println(thisDay);
+    }
+
+    private static void topSalary() {
+        EmployeeList topSel = new EmployeeList();
+        topSel.setBaseList(Program.getEmployeeList().getBaseList());
+        Comparator<? super Employee> SalaryComparator = new SalaryComparator();
+        topSel.getBaseList().sort(SalaryComparator);
+        topSel.getBaseList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
+                        "surname: %s, job title: %s, department name: %s, salary: %d\n",
+                worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getSalary()));
+        System.out.println();
+        System.out.println("Save result to file? (y/n)");
+        if(sc.nextLine().equalsIgnoreCase("y")){
+            try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopSalary.txt")) {
+                for (Employee worker : topSel.getBaseList())
+                    writer.write("Name: " + worker.getName() + ", surname: " + worker.getSurname() +
+                                ", job title: " + worker.getJobTitle() + ", department name: " +
+                        worker.getDepName() + " salary: " + worker.getSalary() +"\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else System.out.println("You choose exit without saving the file");
+    }
+
     private static void averageSalary() {
+        HashSet<String> departments = new HashSet<>();
+        for (Employee worker:Program.getEmployeeList().getBaseList())
+            departments.add(worker.getDepName());
         System.out.println("Select the type of average salary by company or department(c/d)");
         String avSalaryType = sc.nextLine();
         int sum = 0;
@@ -43,7 +76,6 @@ public class Reports {
                 for (Employee worker : Program.getEmployeeList().getBaseList()) sum += worker.getSalary();
                 typeAvSalary = "Average salary by company " + sum / Program.getEmployeeList().getBaseList().size();
             } else if (avSalaryType.equalsIgnoreCase("d")) {
-                structOrg("departments");
                 System.out.println(departments);
                 System.out.println("Select the department (write)");
                 String selDep = sc.nextLine();
@@ -75,26 +107,22 @@ public class Reports {
         } else System.out.println("Yur must select c or d. Try again");
     }
 
-    private static void structOrg(String purpose){
+    private static void structOrg(){
         HashSet<String> depAndBoss = new HashSet<>();
-        for (Employee worker:Program.getEmployeeList().getBaseList()) {
+        for (Employee worker:Program.getEmployeeList().getBaseList())
             depAndBoss.add(worker.getDepName() + ", boss surname is " + worker.getBossSurname());
-            departments.add(worker.getDepName());
-        }
-        if(purpose==null) {
-            System.out.println("Select the reporting option: console or file (c/f)");
-            String choice = sc.nextLine().toLowerCase();
-            if (choice.equals("c")) {
-                depAndBoss.forEach(System.out::println);
-                System.out.println();
-            } else if (choice.equals("f")) {
-                try (FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportOrg.txt")) {
-                    for (String orgInfo : depAndBoss)
-                        writer.write(orgInfo + "\n");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else System.out.println("You must select console or file (c/f), try again");
-        }
+        System.out.println("Select the reporting option: console or file (c/f)");
+        String choice = sc.nextLine().toLowerCase();
+        if (choice.equals("c")) {
+            depAndBoss.forEach(System.out::println);
+            System.out.println();
+        } else if (choice.equals("f")) {
+            try (FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportOrg.txt")) {
+                for (String orgInfo : depAndBoss)
+                    writer.write(orgInfo + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else System.out.println("You must select console or file (c/f), try again");
     }
 }
