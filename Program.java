@@ -84,8 +84,6 @@ public class Program {
     }
 
     public static void changeEmployee() {
-        EmployeeList tempEmployeeList = new EmployeeList();
-        tempEmployeeList.setBaseList(employeeList.getBaseList());
         Integer changeEmpString = searchEmployee();
         if(changeEmpString != -1) {
             System.out.println("""

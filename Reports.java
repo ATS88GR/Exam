@@ -3,7 +3,6 @@ package ExamTaskV2;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 import static ExamTaskV2.Main.sc;
@@ -37,23 +36,42 @@ public class Reports {
     }
 
     private static void devotedEmployee() {
-        GregorianCalendar thisDay = new GregorianCalendar();
-        System.out.println(thisDay);
+        TempEmployeeList topDevoted = new TempEmployeeList();
+        topDevoted.addTempList(Program.getEmployeeList().getBaseList());
+        Comparator <? super Employee> DevoteComparator = new DevoteComparator();
+        topDevoted.getTempList().sort(DevoteComparator);
+        topDevoted.getTempList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
+                        "surname: %s, job title: %s, department name: %s, salary: %d, employee date: %tD\n",
+                worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(),
+                worker.getSalary(), worker.getEmpDate()));
+       /* System.out.println();
+        System.out.println("Save result to file? (y/n)");
+        if(sc.nextLine().equalsIgnoreCase("y")){
+            try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt")) {
+                for (Employee worker : topDevoted.getTempList())
+                    writer.write("Name: " + worker.getName() + ", surname: " + worker.getSurname() +
+                            ", job title: " + worker.getJobTitle() + ", department name: " +
+                            worker.getDepName() + " salary: " + worker.getSalary() + " employement date " +
+                            worker.getEmpDate() +"\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else System.out.println("You choose exit without saving the file");*/
     }
 
     private static void topSalary() {
-        EmployeeList topSel = new EmployeeList();
-        topSel.setBaseList(Program.getEmployeeList().getBaseList());
+        TempEmployeeList topSel = new TempEmployeeList();
+        topSel.addTempList(Program.getEmployeeList().getBaseList());
         Comparator<? super Employee> SalaryComparator = new SalaryComparator();
-        topSel.getBaseList().sort(SalaryComparator);
-        topSel.getBaseList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
+        topSel.getTempList().sort(SalaryComparator);
+        topSel.getTempList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
                         "surname: %s, job title: %s, department name: %s, salary: %d\n",
                 worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getSalary()));
         System.out.println();
         System.out.println("Save result to file? (y/n)");
         if(sc.nextLine().equalsIgnoreCase("y")){
             try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopSalary.txt")) {
-                for (Employee worker : topSel.getBaseList())
+                for (Employee worker : topSel.getTempList())
                     writer.write("Name: " + worker.getName() + ", surname: " + worker.getSurname() +
                                 ", job title: " + worker.getJobTitle() + ", department name: " +
                         worker.getDepName() + " salary: " + worker.getSalary() +"\n");
