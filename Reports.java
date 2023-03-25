@@ -30,9 +30,48 @@ public class Reports {
         switch (chooseAct) {
             case 1 -> {structOrg();}
             case 2 -> {averageSalary();}
-            case 3 -> {topSalary();}
-            case 4 -> {devotedEmployee();}
+            case 3 -> {topReports(1);}
+            case 4 -> {topReports(2);}
         }
+    }
+
+    private static void topReports(int typeOfReport) {
+        TempEmployeeList topDevoted = new TempEmployeeList();
+        topDevoted.addTempList(Program.getEmployeeList().getBaseList());
+        Comparator <? super Employee> topComparator = null;
+        String path = "";
+        switch (typeOfReport) {
+            case 1 -> {
+                topComparator = new SalaryComparator();
+                path = "C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopSalary.txt";
+            }
+            case 2 -> {
+                topComparator = new DevoteComparator();
+                path = "C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt";
+            }
+        }
+        topDevoted.getTempList().sort(topComparator);
+        System.out.println("Save result to file? (y/n)");
+        String saveToFile = sc.nextLine();
+        try (FileWriter writer = new FileWriter(path, false)) {
+        topDevoted.getTempList().stream().limit(10).forEach(worker ->{
+            String strF = String.format("Name: %s,  surname: %s, job title: %s, department name: %s, boss name: %s," +
+                            " boss surname: %s, data of employment(m/d/y): %tD, salary: %d\n",
+                    worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
+                    worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
+            System.out.print(strF);
+            if (saveToFile.equalsIgnoreCase("y")) {
+                try {
+                    writer.write(strF);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        } catch (IOException e) {
+        throw new RuntimeException(e);
+        }
+        System.out.println();
     }
 
     private static void devotedEmployee() {
@@ -44,19 +83,25 @@ public class Reports {
                         "surname: %s, job title: %s, department name: %s, salary: %d, employee date: %tD\n",
                 worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(),
                 worker.getSalary(), worker.getEmpDate()));
-       /* System.out.println();
+        System.out.println();
         System.out.println("Save result to file? (y/n)");
         if(sc.nextLine().equalsIgnoreCase("y")){
             try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt")) {
-                for (Employee worker : topDevoted.getTempList())
-                    writer.write("Name: " + worker.getName() + ", surname: " + worker.getSurname() +
-                            ", job title: " + worker.getJobTitle() + ", department name: " +
-                            worker.getDepName() + " salary: " + worker.getSalary() + " employement date " +
-                            worker.getEmpDate() +"\n");
+                String strF;
+                int count = 0;
+                for (Employee worker : topDevoted.getTempList()) {
+                    strF = String.format("%d. Name: %s,  surname: %s, " +
+                                    "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
+                                    " data of employment(m/d/y): %tD, salary: %d\n",
+                            count, worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
+                            worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
+                    writer.write(strF);
+                    count++;
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else System.out.println("You choose exit without saving the file");*/
+        }else System.out.println("You choose exit without saving the file");
     }
 
     private static void topSalary() {

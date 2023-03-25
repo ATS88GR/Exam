@@ -1,12 +1,10 @@
-Name: Artsiom, surname: Turok, job title: manager, department name: Management salary: 2500
-Name: Eva, surname: Volkova, job title: financier, department name: Financial salary: 2500
-Name: Anna, surname: Kuznecova, job title: marketer, department name: Sales salary: 2300
-Name: Aleksander, surname: Ivanov, job title: financier, department name: Financial salary: 2200
-Name: Mark, surname: Fedorov, job title: manager, department name: Management salary: 2100
-Name: Mihail, surname: Petrov, job title: financier, department name: Financial salary: 2000
-Name: Maksim, surname: Mihailov, job title: economist, department name: Economical salary: 2000
-Name: Sofia, surname: Smirnova, job title: economist, department name: Economic salary: 1900
-Name: Maria, surname: Turok, job title: marketer, department name: Sales salary: 1900
-Name: Maria, surname: Vasileva, job title: manager, department name: Management salary: 1800
-Name: Alis, surname: Novikova, job title: marketer, department name: Sales salary: 1700
-Name: Lev, surname: Alekseev, job title: marketer, department name: Sales salary: 1500
+Name: Eva,  surname: Volkova, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 07/02/09, salary: 2500
+Name: Artsiom,  surname: Turok, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 08/02/12, salary: 2500
+Name: Anna,  surname: Kuznecova, job title: marketer, department name: Sales, boss name: Elena, boss surname: Popova, data of employment(m/d/y): 09/03/14, salary: 2300
+Name: Aleksander,  surname: Ivanov, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 09/23/15, salary: 2200
+Name: Mark,  surname: Fedorov, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 03/03/16, salary: 2100
+Name: Mihail,  surname: Petrov, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 01/10/13, salary: 2000
+Name: Maksim,  surname: Mihailov, job title: economist, department name: Economical, boss name: Ivan, boss surname: Ivanov, data of employment(m/d/y): 05/20/20, salary: 2000
+Name: Sofia,  surname: Smirnova, job title: economist, department name: Economic, boss name: Ivan, boss surname: Ivanov, data of employment(m/d/y): 11/01/08, salary: 1900
+Name: Maria,  surname: Turok, job title: marketer, department name: Sales, boss name: Elena, boss surname: Popova, data of employment(m/d/y): 03/01/19, salary: 1900
+Name: Maria,  surname: Vasileva, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 08/03/18, salary: 1800
