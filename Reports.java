@@ -9,19 +9,19 @@ import static ExamTaskV2.Main.sc;
 
 public class Reports {
     public static void main() {
-        System.out.println("""
+        System.out.println("""              
              Select report type:
              1.Structure organization.
              2.Average salary.
              3.Top employee salary.
              4.Top devoted employers.
              5.Exit
-             """);
+             """);                      //Reports menu
         if (sc.hasNextLine()) {
-            int chooseAct = Integer.parseInt(sc.nextLine());
-            if (chooseAct != 5) {
-                actions(chooseAct);
-                main();
+            int chooseAct = Integer.parseInt(sc.nextLine());    //choose number of report
+            if (chooseAct != 5) {   //if choose is not Exit
+                actions(chooseAct); //go to choose action
+                main();             //to choose next report or exit
             }
         }
     }
@@ -36,8 +36,8 @@ public class Reports {
     }
 
     private static void topReports(int typeOfReport) {
-        TempEmployeeList topDevoted = new TempEmployeeList();
-        topDevoted.addTempList(Program.getEmployeeList().getBaseList());
+        TempEmployeeList topList = new TempEmployeeList();              // top list for sort employees
+        topList.addTempList(Program.getEmployeeList().getBaseList());   //copy base too topList
         Comparator <? super Employee> topComparator = null;
         String path = "";
         switch (typeOfReport) {
@@ -50,17 +50,17 @@ public class Reports {
                 path = "C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt";
             }
         }
-        topDevoted.getTempList().sort(topComparator);
+        topList.getTempList().sort(topComparator);              //sort by choose comparator
         System.out.println("Save result to file? (y/n)");
-        String saveToFile = sc.nextLine();
+        String saveToFile = sc.nextLine();        //save result of saving choose
         try (FileWriter writer = new FileWriter(path, false)) {
-        topDevoted.getTempList().stream().limit(10).forEach(worker ->{
+        topList.getTempList().stream().limit(10).forEach(worker ->{         //stream for show result to console and save to file
             String strF = String.format("Name: %s,  surname: %s, job title: %s, department name: %s, boss name: %s," +
                             " boss surname: %s, data of employment(m/d/y): %tD, salary: %d\n",
                     worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
                     worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
             System.out.print(strF);
-            if (saveToFile.equalsIgnoreCase("y")) {
+            if (saveToFile.equalsIgnoreCase("y")) {     //if choose save to file
                 try {
                     writer.write(strF);
                 } catch (IOException e) {
@@ -74,82 +74,30 @@ public class Reports {
         System.out.println();
     }
 
-    private static void devotedEmployee() {
-        TempEmployeeList topDevoted = new TempEmployeeList();
-        topDevoted.addTempList(Program.getEmployeeList().getBaseList());
-        Comparator <? super Employee> DevoteComparator = new DevoteComparator();
-        topDevoted.getTempList().sort(DevoteComparator);
-        topDevoted.getTempList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
-                        "surname: %s, job title: %s, department name: %s, salary: %d, employee date: %tD\n",
-                worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(),
-                worker.getSalary(), worker.getEmpDate()));
-        System.out.println();
-        System.out.println("Save result to file? (y/n)");
-        if(sc.nextLine().equalsIgnoreCase("y")){
-            try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt")) {
-                String strF;
-                int count = 0;
-                for (Employee worker : topDevoted.getTempList()) {
-                    strF = String.format("%d. Name: %s,  surname: %s, " +
-                                    "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
-                                    " data of employment(m/d/y): %tD, salary: %d\n",
-                            count, worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
-                            worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
-                    writer.write(strF);
-                    count++;
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else System.out.println("You choose exit without saving the file");
-    }
-
-    private static void topSalary() {
-        TempEmployeeList topSel = new TempEmployeeList();
-        topSel.addTempList(Program.getEmployeeList().getBaseList());
-        Comparator<? super Employee> SalaryComparator = new SalaryComparator();
-        topSel.getTempList().sort(SalaryComparator);
-        topSel.getTempList().stream().limit(10).forEach(worker ->System.out.printf("Name: %s, " +
-                        "surname: %s, job title: %s, department name: %s, salary: %d\n",
-                worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getSalary()));
-        System.out.println();
-        System.out.println("Save result to file? (y/n)");
-        if(sc.nextLine().equalsIgnoreCase("y")){
-            try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopSalary.txt")) {
-                for (Employee worker : topSel.getTempList())
-                    writer.write("Name: " + worker.getName() + ", surname: " + worker.getSurname() +
-                                ", job title: " + worker.getJobTitle() + ", department name: " +
-                        worker.getDepName() + " salary: " + worker.getSalary() +"\n");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else System.out.println("You choose exit without saving the file");
-    }
-
     private static void averageSalary() {
-        HashSet<String> departments = new HashSet<>();
+        HashSet<String> departments = new HashSet<>();      //Hashset to save all department name
         for (Employee worker:Program.getEmployeeList().getBaseList())
             departments.add(worker.getDepName());
         System.out.println("Select the type of average salary by company or department(c/d)");
-        String avSalaryType = sc.nextLine();
-        int sum = 0;
-        String typeAvSalary = "";
-        if(avSalaryType.equalsIgnoreCase("c") || avSalaryType.equalsIgnoreCase("d")) {
-            if (avSalaryType.equalsIgnoreCase("c")) {
+        String avSalaryType = sc.nextLine();    //to save choose report by company or department
+        int sum = 0;                            //to save sum of salary's
+        String typeAvSalary = "";               //to save result of average salary
+        if(avSalaryType.equalsIgnoreCase("c") || avSalaryType.equalsIgnoreCase("d")) {  //if choose c or d
+            if (avSalaryType.equalsIgnoreCase("c")) {           //if choose company
                 for (Employee worker : Program.getEmployeeList().getBaseList()) sum += worker.getSalary();
                 typeAvSalary = "Average salary by company " + sum / Program.getEmployeeList().getBaseList().size();
-            } else if (avSalaryType.equalsIgnoreCase("d")) {
+            } else if (avSalaryType.equalsIgnoreCase("d")) {    //if choose department
                 System.out.println(departments);
                 System.out.println("Select the department (write)");
                 String selDep = sc.nextLine();
-                boolean searchDepResult = false;
-                int countEmp = 0;
-                for (String dep : departments)
+                boolean searchDepResult = false;            //to save result of search department
+                int countEmp = 0;                           //count employees in department
+                for (String dep : departments)              //checking the correct spelling of the department
                     if (selDep.equalsIgnoreCase(dep)) {
                         searchDepResult = true;
                         break;
                     }
-                if (searchDepResult) {
+                if (searchDepResult) {                      //if spelling is correct
                     for (Employee worker : Program.getEmployeeList().getBaseList())
                         if (selDep.equalsIgnoreCase(worker.getDepName())) {
                             sum += worker.getSalary();
@@ -160,18 +108,18 @@ public class Reports {
             }
             System.out.println(typeAvSalary);
         System.out.println("Save result to file? (y/n)");
-            if(sc.nextLine().equalsIgnoreCase("y")){
+            if(sc.nextLine().equalsIgnoreCase("y")){        //saving result to file
                 try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportAvSalary.txt")) {
                     writer.write(typeAvSalary);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-        } else System.out.println("Yur must select c or d. Try again");
+        } else System.out.println("Yur must select c or d. Try again");    //
     }
 
     private static void structOrg(){
-        HashSet<String> depAndBoss = new HashSet<>();
+        HashSet<String> depAndBoss = new HashSet<>();       //HashSet to save list of departments and boss surnames
         for (Employee worker:Program.getEmployeeList().getBaseList())
             depAndBoss.add(worker.getDepName() + ", boss surname is " + worker.getBossSurname());
         System.out.println("Select the reporting option: console or file (c/f)");

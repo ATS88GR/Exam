@@ -8,23 +8,40 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        /*System.out.println("Enter a login");
+        System.out.println("Enter a login");
         String login = sc.nextLine();
         System.out.println("Enter a password");
         String password = sc.nextLine();
 
-       if(checkUser(login, password)){*/
-           LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
-           LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
-           chooseAction();
+       if(checkUser(login, password)){
+        Runnable loadingFiles = () ->{      //Thread for loading current and retired employees
+            System.out.println("Start the process of uploading employee data, please wait");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
+            LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
+            System.out.println("Employee data loading completed");
+        };
+        Thread loadFileThread = new Thread(loadingFiles, "loadFileThread");
+        loadFileThread.start();
+        chooseAction();  //choosing actions in main menu
+           try {
+               loadFileThread.join();
+           } catch(InterruptedException e){
+               System.out.printf("%s has been interrupted", loadFileThread.getName());
+           }
+
            SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
            SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
-      // }
+       }
         sc.close();
     }
 
-    private static void chooseAction() {
-        int chooseAct;
+    private static void chooseAction() {     //actions in main menu
+        int chooseAct;   //int for saving choose
         try {
             System.out.println("""
                     Select the number of actions:
