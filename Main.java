@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     private static int count =0;        // for authorization attempts
-
     public static Scanner sc = new Scanner(System.in);
+    public static String path = System.getProperty("user.dir");
 
     public static void main(String[] args) {
         System.out.println("Enter a login");
@@ -21,8 +21,8 @@ public class Main {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
-            LoadFile.load("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
+            LoadFile.load(path + "\\BaseEmployee.bin", Program.getEmployeeList());
+            LoadFile.load(path + "\\DismissEmployee.bin", Program.getDismissEmployeeList());
             System.out.println("Employee data loading completed");
         };
         Thread loadFileThread = new Thread(loadingFiles, "loadFileThread");
@@ -34,8 +34,8 @@ public class Main {
                System.out.printf("%s has been interrupted", loadFileThread.getName());
            }
 
-           SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\BaseEmployee.bin", Program.getEmployeeList());
-           SaveFile.save("C:\\Users\\user\\eclipse-workspace\\Exam\\DismissEmployee.bin", Program.getDismissEmployeeList());
+           SaveFile.save(path + "\\BaseEmployee.bin", Program.getEmployeeList());
+           SaveFile.save(path + "\\DismissEmployee.bin", Program.getDismissEmployeeList());
        }
         sc.close();
     }
@@ -83,7 +83,7 @@ public class Main {
 
     public static boolean checkUser(String login, String password){
         if(login.equals("admin") && password.equals("12345678")) {
-            System.out.println("Access is allowed");
+            System.out.println("Access is allowed\n");
             return true;
         }
         else {

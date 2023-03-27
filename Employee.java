@@ -1,10 +1,12 @@
 package ExamTaskV2;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 public class Employee implements Serializable {
-
+    @Serial
+    private static final long serialVersionUID = 1381274585789427876L;
     private String name;
     private String surname;
     private String dob;     //date of birthday
@@ -17,27 +19,8 @@ public class Employee implements Serializable {
     private GregorianCalendar empDate;      //employment date
     private int salary;
 
-    public Employee(String name, String surname, String dob, String gender, String phoneNumber, String jobTitle,
-                    String depName, String bossName, String bossSurname, GregorianCalendar empDate, int salary) {
-
-        this.name = name;
-        this.surname = surname;
-        this.dob = dob;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-        this.jobTitle = jobTitle;
-        this.depName = depName;
-        this.bossName = bossName;
-        this.bossSurname = bossSurname;
-        this.empDate = empDate;
-        this.salary = salary;
-    }
-
-    public Employee() {
-    }
-
     public String getName() {
-        return name;// fierld[0]
+        return name;
     }
 
     public void setName(String name) {

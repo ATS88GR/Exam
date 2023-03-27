@@ -39,21 +39,21 @@ public class Reports {
         TempEmployeeList topList = new TempEmployeeList();              // top list for sort employees
         topList.addTempList(Program.getEmployeeList().getBaseList());   //copy base too topList
         Comparator <? super Employee> topComparator = null;
-        String path = "";
+        String reportPath = "";
         switch (typeOfReport) {
             case 1 -> {
                 topComparator = new SalaryComparator();
-                path = "C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopSalary.txt";
+                reportPath = Main.path + "\\ReportTopSalary.txt";
             }
             case 2 -> {
                 topComparator = new DevoteComparator();
-                path = "C:\\Users\\user\\eclipse-workspace\\Exam\\ReportTopDevoted.txt";
+                reportPath = Main.path + "\\ReportTopDevoted.txt";
             }
         }
         topList.getTempList().sort(topComparator);              //sort by choose comparator
         System.out.println("Save result to file? (y/n)");
         String saveToFile = sc.nextLine();        //save result of saving choose
-        try (FileWriter writer = new FileWriter(path, false)) {
+        try (FileWriter writer = new FileWriter(reportPath, false)) {
         topList.getTempList().stream().limit(10).forEach(worker ->{         //stream for show result to console and save to file
             String strF = String.format("Name: %s,  surname: %s, job title: %s, department name: %s, boss name: %s," +
                             " boss surname: %s, data of employment(m/d/y): %tD, salary: %d\n",
@@ -109,7 +109,7 @@ public class Reports {
             System.out.println(typeAvSalary);
         System.out.println("Save result to file? (y/n)");
             if(sc.nextLine().equalsIgnoreCase("y")){        //saving result to file
-                try(FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportAvSalary.txt")) {
+                try(FileWriter writer = new FileWriter(Main.path + "\\ReportAvSalary.txt")) {
                     writer.write(typeAvSalary);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -128,7 +128,7 @@ public class Reports {
             depAndBoss.forEach(System.out::println);
             System.out.println();
         } else if (choice.equals("f")) {
-            try (FileWriter writer = new FileWriter("C:\\Users\\user\\eclipse-workspace\\Exam\\ReportOrg.txt")) {
+            try (FileWriter writer = new FileWriter(Main.path + "\\ReportOrg.txt")) {
                 for (String orgInfo : depAndBoss)
                     writer.write(orgInfo + "\n");
             } catch (IOException e) {

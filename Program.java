@@ -100,7 +100,7 @@ public class Program {
                     10. Employment date
                     11. Salary""");
             int num;            // num for save menu choose
-            while (true) {      //continue changing the fields of the employee object?
+            while (true) {      //continue changing fields of the employee object?
                 while (true) {      // dialog to correct menu selection
                     try {
                         num = sc.nextInt();
@@ -167,15 +167,15 @@ public class Program {
                 }
                 System.out.println("Continue employee changing?(y/n):");
                 if(!sc.nextLine().equalsIgnoreCase("y")) break;     //break changing loop
-                else System.out.println("Choice the number of changed field"); //continue changing
+                else System.out.println("Select the number of changed field"); //continue changing
             }
         }
     }
 
     public static Integer searchEmployee() {
-        boolean searchBoolean = false;              //boolean to save of the comparison of the searched field in base with the entered word
-        String searchWord;                          //String to save entered word of search parameter
-        int selAct;                                 //int to save the number of selected parameter
+        boolean searchBoolean = false;              //to save of the comparison of the searched field in base with the entered word
+        String searchWord;                          //to save entered word of search parameter
+        int selAct;                                 //to save the number of selected parameter
         try {                                       //Selection of search parameter
             System.out.println("""
                     Select search option number:
@@ -190,7 +190,7 @@ public class Program {
                 if (selAct != 5) {                              // Selected parameter isn't Exit
                     System.out.println("Enter selected parameter");
                     searchWord = sc.nextLine();                 //Enter word of searching parameter
-                    Integer posInBase = 0;                          //Integer for HashMap to saving number of Employee position in base
+                    Integer posInBase = 0;                      //Integer for HashMap to saving number of Employee position in base
                     HashMap<Integer, Employee> searchList = new HashMap<>(); //Hashmap with search employees and they positions in base
                     for (Employee employee:employeeList.getBaseList()) {     //Searching employee
                         switch (selAct) {
@@ -219,7 +219,7 @@ public class Program {
                         if(searchList.size() == 1)
                             return (Integer) searchList.keySet().toArray()[0];          //return employee position, if search result is 1
                         else {
-                            int position;       //int to save position in base one of displayed employee
+                            int position;       //to save position in base one of displayed employee
                             while (true) {      //loop for correct choose employee position
                                 System.out.println("Select number need employee");
                                 try {
