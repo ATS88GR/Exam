@@ -1,9 +1,10 @@
 package ExamTaskV2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeList {
+public class EmployeeList implements Serializable {
     private List<Employee> baseList = new ArrayList<>();
 
     public EmployeeList() {

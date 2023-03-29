@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Program {
-    private static final EmployeeList employeeList = new EmployeeList();
-    private static final EmployeeList dismissEmployeeList = new EmployeeList();
+    private static final EmployeeList employeeList = new EmployeeList();            //base of current employees
+    private static final EmployeeList dismissEmployeeList = new EmployeeList();     //base of dismissed employees
 
-    public static Scanner sc = Main.sc;
+    public static Scanner sc = Main.sc;                                             //static scanner
 
     public static EmployeeList getEmployeeList() {
         return employeeList;
@@ -19,7 +19,7 @@ public class Program {
         return dismissEmployeeList;
     }
 
-    public static void recruit(){
+    public static void recruit(){                       //method for adding employee in base
         Employee newEmp = new Employee();
         try {
             System.out.println("Enter employee name");
@@ -53,30 +53,27 @@ public class Program {
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        employeeList.getBaseList().add(newEmp);
+        employeeList.getBaseList().add(newEmp);             //add info about employee to base
     }
 
     public static void dismiss(){
-        //System.out.println("Select the employee's surname to terminate");
         try {
-            //int disLine = searchEmployee(sc.nextLine());
-            int disLine = searchEmployee();
-            dismissEmployeeList.getBaseList().add(employeeList.getBaseList().get(disLine));
-            employeeList.getBaseList().remove(disLine);
+            int disLine = searchEmployee();            //search number of line in base(list) with employees
+            dismissEmployeeList.getBaseList().add(employeeList.getBaseList().get(disLine));   //add employee to dismissed employee base
+            employeeList.getBaseList().remove(disLine); //remove employee from base with current employees
         }catch (Exception e){
             System.out.println("An error occurred, please try again");
         }
-
     }
 
-    public static void showEmployersAtConsole(List<Employee> empList) {
+    public static void showEmployersAtConsole(List<Employee> empList) {        //show current or dismissed employees at console
        try {
-           int count = 0;
+           int numOfLine = 0;           //number of employee line
             for (Employee worker : empList) {
                 System.out.printf("%d. Name: %s,  surname: %s, date of birthday: %s, gender: %s, phone number: %s, " +
                                 "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
                                 " data of employment(m/d/y): %tD, salary: %d\n",
-                        count++, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
+                        numOfLine++, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
                         worker.getPhoneNumber(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
                         worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
             }
@@ -87,12 +84,8 @@ public class Program {
     }
 
     public static void changeEmployee() {
-        EmployeeList tempEmployeeList = new EmployeeList();
-        tempEmployeeList.setBaseList(employeeList.getBaseList());
-        //System.out.println("Enter a surname of employee");
-        //Integer changeEmpString = searchEmployee(sc.nextLine());
-        Integer changeEmpString = searchEmployee();
-        if(changeEmpString != -1) {
+        Integer changeEmpString = searchEmployee();         //search number of line changing employee in base
+        if(changeEmpString != -1) {                     // if changeEmpString is -1, employee not found
             System.out.println("""
                     What information about the employee you want change? Choice the number:
                     1. Name;
@@ -106,9 +99,9 @@ public class Program {
                     9. BossSurname;
                     10. Employment date
                     11. Salary""");
-            int num;
-            while (true) {      //continue changing the fields of the employee object?
-                while (true) {      // dialog to select changes
+            int num;            // num for save menu choose
+            while (true) {      //continue changing fields of the employee object?
+                while (true) {      // dialog to correct menu selection
                     try {
                         num = sc.nextInt();
                         sc.nextLine();
@@ -119,53 +112,44 @@ public class Program {
                         System.out.println("Your choice isn't a number. Try again");
                     }
                 }
-                switch (num) {
-                    case 1: {
+                switch (num) {      //process of changing employee information
+                    case 1 -> {
                         System.out.println("You change Name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setName(sc.nextLine());  //setName(sc.nextLine());
-                        break;
                     }
-                    case 2: {
+                    case 2 -> {
                         System.out.println("You change Surname to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setSurname(sc.nextLine());
-                        break;
                     }
-                    case 3: {
+                    case 3 -> {
                         System.out.println("You change Date of birthday to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setDob(sc.nextLine());
-                        break;
                     }
-                    case 4: {
+                    case 4 -> {
                         System.out.println("You change Gender to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setGender(sc.nextLine());
-                        break;
                     }
-                    case 5: {
+                    case 5 -> {
                         System.out.println("You change Phone Number to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setPhoneNumber(sc.nextLine());
-                        break;
                     }
-                    case 6: {
+                    case 6 -> {
                         System.out.println("You change Job title to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setJobTitle(sc.nextLine());
-                        break;
                     }
-                    case 7: {
+                    case 7 -> {
                         System.out.println("You change Department name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setDepName(sc.nextLine());
-                        break;
                     }
-                    case 8: {
+                    case 8 -> {
                         System.out.println("You change boss name to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setBossName(sc.nextLine());
-                        break;
                     }
-                    case 9: {
+                    case 9 -> {
                         System.out.println("You change boss surname to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setBossSurname(sc.nextLine());
-                        break;
                     }
-                    case 10: {
+                    case 10 -> {
                         System.out.println("Enter changed year of employment");
                         int year = sc.nextInt();
                         System.out.println("Enter changed month of employment");
@@ -175,67 +159,23 @@ public class Program {
                         sc.nextLine();
                         employeeList.getBaseList().get(changeEmpString).setEmpDate(new GregorianCalendar(year,
                                 (month - 1), day));
-                        break;
                     }
-                    case 11: {
+                    case 11 -> {
                         System.out.println("You change salary to the following: ");
                         employeeList.getBaseList().get(changeEmpString).setSalary(sc.nextInt());
-                        break;
                     }
                 }
                 System.out.println("Continue employee changing?(y/n):");
-                if(!sc.nextLine().equalsIgnoreCase("y")) break;
-                else System.out.println("Choice the number of changed field");
+                if(!sc.nextLine().equalsIgnoreCase("y")) break;     //break changing loop
+                else System.out.println("Select the number of changed field"); //continue changing
             }
         }
     }
 
-    /*public Integer searchEmployee(String searchSurname) {
-        Integer count = 0;
-        HashMap<Integer,Employee> searchList = new HashMap<>();
-        for (Employee employee:employeeList.getBaseList()) {
-            if (employee.getSurname().equalsIgnoreCase(searchSurname)) {
-                searchList.put(count,employee);
-            }
-            count++;
-        }
-        if(searchList.isEmpty()){
-            System.out.println("The employee is not found");
-            return -1;
-        }
-        else {
-            searchList.forEach((sn, worker) -> {
-                System.out.printf("%d. Name: %s,  surname: %s, date of birthday: %s, gender: %s, phone number: %s, " +
-                                "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
-                                " data of employment(m/d/y): %tD, salary: %d\n",
-                        sn, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
-                        worker.getPhoneNumber(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
-                        worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
-            });
-            if(searchList.size() == 1) {
-                return (Integer) searchList.keySet().toArray()[0];
-            }
-            else {
-                int num;
-                while (true) {
-                System.out.println("Select serial number need employee");
-                    try {
-                        num = sc.nextInt();
-                        sc.nextLine();
-                        if(searchList.containsKey(num)) break;
-                        else System.out.println("Serial number is not exist. Try again");
-                    } catch (Exception e) {
-                        System.out.println("You are select isn't a number. Try again");
-                    }
-                }
-                return num;
-            }
-        }
-    }*/
     public static Integer searchEmployee() {
-        boolean searchBoolean = false;              //boolean to save of the comparison of the searched field with the entered word
-        String searchWord;                          //String to save entered word of search parameter
-        int selAct;                                 //int to save selected parameter
+        boolean searchBoolean = false;              //to save of the comparison of the searched field in base with the entered word
+        String searchWord;                          //to save entered word of search parameter
+        int selAct;                                 //to save the number of selected parameter
         try {                                       //Selection of search parameter
             System.out.println("""
                     Select search option number:
@@ -249,32 +189,18 @@ public class Program {
                 selAct = Integer.parseInt(sc.nextLine());       // Parameter is select
                 if (selAct != 5) {                              // Selected parameter isn't Exit
                     System.out.println("Enter selected parameter");
-                    searchWord = sc.nextLine();                 //Enter word of parameter
-                    Integer count = 0;                          //Integer for HashMap to saving number of Employee position in EmployeeList
-                    HashMap<Integer, Employee> searchList = new HashMap<>();
-                    for (Employee employee:employeeList.getBaseList()) {
-                        switch (selAct){
-                            case 1: {
-                                searchBoolean = employee.getSurname().equalsIgnoreCase(searchWord);
-                                break;
-                            }
-                            case 2:{
-                                searchBoolean = employee.getJobTitle().equalsIgnoreCase(searchWord);
-                                break;
-                            }
-                            case 3:{
-                                searchBoolean = employee.getDepName().equalsIgnoreCase(searchWord);
-                                break;
-                            }
-                            case 4:{
-                                searchBoolean = employee.getBossSurname().equalsIgnoreCase(searchWord);
-                                break;
-                            }
+                    searchWord = sc.nextLine();                 //Enter word of searching parameter
+                    Integer posInBase = 0;                      //Integer for HashMap to saving number of Employee position in base
+                    HashMap<Integer, Employee> searchList = new HashMap<>(); //Hashmap with search employees and they positions in base
+                    for (Employee employee:employeeList.getBaseList()) {     //Searching employee
+                        switch (selAct) {
+                            case 1 -> {searchBoolean = employee.getSurname().equalsIgnoreCase(searchWord);}
+                            case 2 -> {searchBoolean = employee.getJobTitle().equalsIgnoreCase(searchWord);}
+                            case 3 -> {searchBoolean = employee.getDepName().equalsIgnoreCase(searchWord);}
+                            case 4 -> {searchBoolean = employee.getBossSurname().equalsIgnoreCase(searchWord);}
                         }
-                        if (searchBoolean) {                //if we find search word in list
-                            searchList.put(count,employee);
-                        }
-                        count++;
+                        if (searchBoolean) searchList.put(posInBase,employee);  //if we find search word in base, employee put to searchList
+                        posInBase++;
                     }
                     // Processing list with search results
                     if(searchList.isEmpty()){                                   //the list is empty
@@ -282,31 +208,30 @@ public class Program {
                         return -1;
                     }
                     else {                                                      // if the list is not empty, display its contents on the screen
-                        searchList.forEach((sn, worker) -> {
+                        searchList.forEach((pos, worker) -> {
                             System.out.printf("%d. Name: %s,  surname: %s, date of birthday: %s, gender: %s, phone number: %s, " +
                                             "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
                                             " data of employment(m/d/y): %tD, salary: %d\n",
-                                    sn, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
+                                    pos, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
                                     worker.getPhoneNumber(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
                                     worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
                         });
-                        if(searchList.size() == 1) {
-                            return (Integer) searchList.keySet().toArray()[0];
-                        }
+                        if(searchList.size() == 1)
+                            return (Integer) searchList.keySet().toArray()[0];          //return employee position, if search result is 1
                         else {
-                            int num;
-                            while (true) {
-                                System.out.println("Select serial number need employee");
+                            int position;       //to save position in base one of displayed employee
+                            while (true) {      //loop for correct choose employee position
+                                System.out.println("Select number need employee");
                                 try {
-                                    num = sc.nextInt();
+                                    position = sc.nextInt();
                                     sc.nextLine();
-                                    if(searchList.containsKey(num)) break;
-                                    else System.out.println("Serial number is not exist. Try again");
+                                    if(searchList.containsKey(position)) break;
+                                    else System.out.println("The number is not exist. Try again");
                                 } catch (Exception e) {
                                     System.out.println("You are select isn't a number. Try again");
                                 }
                             }
-                            return num;
+                            return position;        //return employee position which was chosen
                         }
                     }
                 }
@@ -314,6 +239,6 @@ public class Program {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return  -1;
+        return  -1;     //return -1 if employee does not found
     }
 }

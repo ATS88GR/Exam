@@ -7,8 +7,7 @@ public class LoadFile {
 
     public static void load (String path, EmployeeList loadEmpList) {
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path))) {
-            TempEmployeeList tel = (TempEmployeeList) ois.readObject();
-            loadEmpList.setBaseList(tel.getTempBaseList()); // read List
+            loadEmpList.setBaseList(((EmployeeList) ois.readObject()).getBaseList()); // read List
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

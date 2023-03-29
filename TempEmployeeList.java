@@ -1,22 +1,16 @@
 package ExamTaskV2;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TempEmployeeList implements Serializable {
+public class TempEmployeeList {
+    private final List<Employee> tempList = new ArrayList<>();
 
-    private List<Employee> tempBaseList;
-    public TempEmployeeList(EmployeeList employeeList) {
-        tempBaseList = employeeList.getBaseList();
+    public List<Employee> getTempList() {
+        return tempList;
     }
 
-    public List<Employee> getTempBaseList() {
-        return tempBaseList;
+    public void addTempList(List <Employee> list){
+        tempList.addAll(list);
     }
-
-    public void setTempBaseList(List<Employee> tempBaseList) {
-        this.tempBaseList = tempBaseList;
-    }
-
-
 }

@@ -1,0 +1,10 @@
+Name: Arina,  surname: Semenova, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 06/01/05, salary: 2600
+Name: Nikita,  surname: Egorov, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 03/02/08, salary: 2150
+Name: Sofia,  surname: Smirnova, job title: economist, department name: Economic, boss name: Ivan, boss surname: Ivanov, data of employment(m/d/y): 11/01/08, salary: 1900
+Name: Artsiom,  surname: Turok, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 08/02/12, salary: 2500
+Name: Mihail,  surname: Petrov, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 01/10/13, salary: 2000
+Name: Anna,  surname: Kuznecova, job title: marketer, department name: Sales, boss name: Elena, boss surname: Popova, data of employment(m/d/y): 09/03/14, salary: 2300
+Name: Ilja,  surname: Lebedev, job title: marketer, department name: Sales, boss name: Elena, boss surname: Popova, data of employment(m/d/y): 08/02/15, salary: 2050
+Name: Aleksander,  surname: Ivanov, job title: financier, department name: Financial, boss name: Oleg, boss surname: Baranov, data of employment(m/d/y): 09/23/15, salary: 2200
+Name: Mark,  surname: Fedorov, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 03/03/16, salary: 2100
+Name: Maria,  surname: Vasileva, job title: manager, department name: Management, boss name: Aleksei, boss surname: Sokolov, data of employment(m/d/y): 08/03/18, salary: 1800
