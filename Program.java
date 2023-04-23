@@ -1,5 +1,6 @@
 package ExamTaskV2;
 
+import java.io.*;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Scanner;
 public class Program {
     private static final EmployeeList employeeList = new EmployeeList();            //base of current employees
     private static final EmployeeList dismissEmployeeList = new EmployeeList();     //base of dismissed employees
-
     public static Scanner sc = Main.sc;                                             //static scanner
 
     public static EmployeeList getEmployeeList() {
@@ -56,6 +56,40 @@ public class Program {
         employeeList.getBaseList().add(newEmp);             //add info about employee to base
     }
 
+    public static void addEmployeeFromTxt() {                       //adding employee list from txt file
+        File file = new File(Main.path + "\\ReportEmployers(just fields).txt");
+        if(file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(Main.path + "\\ReportEmployers(just fields).txt"))) {
+                String line = br.readLine();
+                while (line != null) {
+                    Employee newEmp = new Employee();
+                    System.out.println(line);
+                    String[] arrEmpFields = line.split(" ");
+                    newEmp.setName(arrEmpFields[0]);
+                    newEmp.setSurname(arrEmpFields[1]);
+                    newEmp.setDob(arrEmpFields[2]);
+                    newEmp.setGender(arrEmpFields[3]);
+                    newEmp.setPhoneNumber(arrEmpFields[4]);
+                    newEmp.setJobTitle(arrEmpFields[5]);
+                    newEmp.setDepName(arrEmpFields[6]);
+                    newEmp.setBossName(arrEmpFields[7]);
+                    newEmp.setBossSurname(arrEmpFields[8]);
+                    String[] empDate = arrEmpFields[9].split("/");
+                    int year = Integer.parseInt(empDate[2]);
+                    int month = Integer.parseInt(empDate[0]);
+                    int day = Integer.parseInt(empDate[1]);
+                    newEmp.setEmpDate(new GregorianCalendar(year, (month - 1), day));
+                    newEmp.setSalary(Integer.parseInt(arrEmpFields[10]));
+                    employeeList.getBaseList().add(newEmp);
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println();
+        } else System.out.println("File doesn't exist");
+    }
+
     public static void dismiss(){
         try {
             int disLine = searchEmployee();            //search number of line in base(list) with employees
@@ -70,7 +104,7 @@ public class Program {
        try {
            int numOfLine = 0;           //number of employee line
             for (Employee worker : empList) {
-                System.out.printf("%d. Name: %s,  surname: %s, date of birthday: %s, gender: %s, phone number: %s, " +
+                System.out.printf("%d. Name: %s, surname: %s, date of birthday: %s, gender: %s, phone number: %s, " +
                                 "job title: %s, department name: %s, boss name: %s, boss surname: %s," +
                                 " data of employment(m/d/y): %tD, salary: %d\n",
                         numOfLine++, worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),

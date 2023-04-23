@@ -15,11 +15,12 @@ public class Reports {
              2.Average salary.
              3.Top employee salary.
              4.Top devoted employers.
-             5.Exit
+             5.Top name of employers.
+             6.Exit
              """);                      //Reports menu
         if (sc.hasNextLine()) {
             int chooseAct = Integer.parseInt(sc.nextLine());    //choose number of report
-            if (chooseAct != 5) {   //if choose is not Exit
+            if (chooseAct != 6) {   //if choose is not Exit
                 actions(chooseAct); //go to choose action
                 main();             //to choose next report or exit
             }
@@ -32,10 +33,15 @@ public class Reports {
             case 2 -> {averageSalary();}
             case 3 -> {topReports(1);}
             case 4 -> {topReports(2);}
+            case 5 -> {topReports(3);}
         }
     }
 
     private static void topReports(int typeOfReport) {
+        int sizeOfTop = 10;                         //number of employee in top report
+        System.out.println("Type size of top");
+        try {sizeOfTop = Integer.parseInt(Main.sc.nextLine());
+        } catch (Exception e) {System.out.println("You type symbol, but not number. Default top number is 10");}
         TempEmployeeList topList = new TempEmployeeList();              // top list for sort employees
         topList.addTempList(Program.getEmployeeList().getBaseList());   //copy base too topList
         Comparator <? super Employee> topComparator = null;
@@ -49,16 +55,27 @@ public class Reports {
                 topComparator = new DevoteComparator();
                 reportPath = Main.path + "\\ReportTopDevoted.txt";
             }
+            case 3 ->{
+                topComparator = new NameComparator();
+                reportPath = Main.path + "\\ReportEmployers(just fields).txt";
+            }
         }
         topList.getTempList().sort(topComparator);              //sort by choose comparator
         System.out.println("Save result to file? (y/n)");
         String saveToFile = sc.nextLine();        //save result of saving choose
         try (FileWriter writer = new FileWriter(reportPath, false)) {
-        topList.getTempList().stream().limit(10).forEach(worker ->{         //stream for show result to console and save to file
-            String strF = String.format("Name: %s,  surname: %s, job title: %s, department name: %s, boss name: %s," +
-                            " boss surname: %s, data of employment(m/d/y): %tD, salary: %d\n",
-                    worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
-                    worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
+            String finalReportPath = reportPath;
+            topList.getTempList().stream().limit(sizeOfTop).forEach(worker ->{         //stream for show result to console and save to file
+                String strF = String.format("Name: %s, surname: %s, job title: %s, department name: %s, boss name: %s," +
+                                " boss surname: %s, data of employment(m/d/y): %tD, salary: %d\n",
+                        worker.getName(), worker.getSurname(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
+                        worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
+                if(finalReportPath.equals(Main.path + "\\ReportEmployers(just fields).txt")) {          //such a format for the possibility, use this report to update the database by txt file
+                    strF = String.format("%s %s %s %s %s %s %s %s %s %tD %d\n",
+                            worker.getName(), worker.getSurname(), worker.getDob(), worker.getGender(),
+                            worker.getPhoneNumber(), worker.getJobTitle(), worker.getDepName(), worker.getBossName(),
+                            worker.getBossSurname(), worker.getEmpDate(), worker.getSalary());
+            }
             System.out.print(strF);
             if (saveToFile.equalsIgnoreCase("y")) {     //if choose save to file
                 try {

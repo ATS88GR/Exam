@@ -52,11 +52,12 @@ public class Main {
                     5. Change information about employee.
                     6. Search the employee.
                     7. Reports.
-                    8. Exit.
+                    8. Add employee list from txt file.
+                    9. Exit.
                     """);
             if (sc.hasNextLine()) {
                 chooseAct = Integer.parseInt(sc.nextLine());
-                if (chooseAct != 8) {
+                if (chooseAct != 9) {
                     actions(chooseAct);
                     chooseAction();
                 }
@@ -76,7 +77,8 @@ public class Main {
             case 5 -> {Program.changeEmployee();}
             case 6 -> {Program.searchEmployee();}
             case 7 -> {Reports.main();}
-            case 8 -> {System.out.println("Exit the program");}
+            case 8 -> {Program.addEmployeeFromTxt();}
+            case 9 -> {System.out.println("Exit the program");}
             default -> System.out.println("You choose number without action");
         }
     }
@@ -94,7 +96,7 @@ public class Main {
                 String loginAgain = sc.nextLine();
                 System.out.println("Enter a password");
                 String passwordAgain = sc.nextLine();
-                sc.close();
+                System.out.println();
                 return checkUser(loginAgain, passwordAgain);
             }
             else {
